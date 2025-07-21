@@ -13,6 +13,7 @@ import {
 import { Home, Star, Favorite, History, ShoppingBasket } from '@mui/icons-material';
 import { Recipe, InventoryItem } from '../types';
 import RecipeCard from '../components/RecipeCard';
+import dummyRecipes from '../data/dummyRecipes'
 
 interface Props {
   user: {
@@ -97,6 +98,17 @@ const MainScreen: React.FC<Props> = ({
 
       {/* メインコンテンツ */}
       <Container sx={{ py: 4 }}>
+        {activeTab === 'home' &&
+          dummyRecipes.map((recipe) => (
+            <RecipeCard
+              key={recipe.id}
+              recipe={recipe}
+              onClick={() => onSelectRecipe(recipe)}
+              onToggleFavorite={() => onToggleFavorite(recipe.id)}
+              isFavorite={recipe.isFavorite}
+            />
+          ))}
+
         {activeTab === 'favorites' &&
           favorites.map((recipe) => (
             <RecipeCard
